@@ -13,11 +13,11 @@ public class Encounter {
     private long encounterId;
     @ManyToOne()
     @JoinColumn(name = "patient_id")
-    private User patient;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-    private User doctor;
+    private Doctor doctor;
     private LocalDateTime date;
 
     @OneToMany(mappedBy = "encounter")
@@ -29,7 +29,7 @@ public class Encounter {
 
 
 
-    public Encounter(User patient, User doctor, LocalDateTime date) {
+    public Encounter(Patient patient, Doctor doctor, LocalDateTime date) {
         this.patient = patient;
         this.doctor = doctor;
         this.date = date;

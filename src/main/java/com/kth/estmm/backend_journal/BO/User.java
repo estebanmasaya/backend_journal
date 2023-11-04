@@ -4,23 +4,22 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@MappedSuperclass
 public class User {
 
     public User() {
     }
 
-    public User(String name, String email, String password, Role role) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
-    private long userId;
+    @Column(name = "id")
+    private long id;
 
     private String name;
     @Column(
@@ -31,17 +30,6 @@ public class User {
     private String email;
 
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Encounter> patientEncounters;
-
-    @OneToMany(mappedBy = "doctor")
-    List<Encounter> doctorEncounters;
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Condition> patientConditions;
 
     public String getName() {
         return name;
@@ -67,22 +55,14 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 '}';
     }
 }

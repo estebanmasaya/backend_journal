@@ -1,16 +1,15 @@
 package com.kth.estmm.backend_journal.BO;
 
 import jakarta.persistence.*;
-
 @Entity
-public class Condition {
+public class Conditions {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "condition_id")
     private long conditionId;
     @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private User patient;
+    @JoinColumn(name = "id")
+    private Patient patient;
 
 
     private String description;
