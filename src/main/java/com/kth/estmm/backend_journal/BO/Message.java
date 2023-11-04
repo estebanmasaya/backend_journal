@@ -21,9 +21,4 @@ public class Message {
     private User doctor;
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "encounter")
-    private List<Observation> observations;
-
-
-
 }
