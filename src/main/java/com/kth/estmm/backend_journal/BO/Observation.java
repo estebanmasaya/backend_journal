@@ -2,6 +2,8 @@ package com.kth.estmm.backend_journal.BO;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Observation {
     @Id
@@ -9,31 +11,27 @@ public class Observation {
     @Column(name = "observation_id")
     private long observationId;
 
+    @ManyToOne()
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
     @ManyToOne
-    @JoinColumn(name= "encounter_id")
-    private Encounter encounter;
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+    private LocalDateTime date;
 
     private String description;
 
     public Observation() {
     }
 
-    public Observation(long observationId, Encounter encounter, String description) {
+    public Observation(long observationId, String description) {
         this.observationId = observationId;
-        this.encounter = encounter;
         this.description = description;
     }
 
     public void setObservationId(long observationId) {
         this.observationId = observationId;
-    }
-
-    public Encounter getEncounter() {
-        return encounter;
-    }
-
-    public void setEncounter(Encounter encounter) {
-        this.encounter = encounter;
     }
 
     public String getDescription() {
@@ -52,7 +50,7 @@ public class Observation {
     public String toString() {
         return "Observation{" +
                 "observationId=" + observationId +
-                ", encounter=" + encounter +
+
                 ", description='" + description + '\'' +
                 '}';
     }

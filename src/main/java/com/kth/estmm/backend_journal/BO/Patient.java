@@ -12,6 +12,9 @@ public class Patient extends User{
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Condition> patientConditions;
 
+    @OneToMany(mappedBy = "patient")
+    private List<Observation> observations;
+
     public Patient() {
     }
 

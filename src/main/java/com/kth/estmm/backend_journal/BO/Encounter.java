@@ -20,9 +20,6 @@ public class Encounter {
     private Doctor doctor;
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "encounter")
-    private List<Observation> observations;
-
 
     public Encounter() {
     }
@@ -67,14 +64,6 @@ public class Encounter {
         this.date = date;
     }
 
-    public List<Observation> getObservations() {
-        return observations;
-    }
-
-    public void setObservations(List<Observation> observations) {
-        this.observations = observations;
-    }
-
     @Override
     public String toString() {
         return "Encounter{" +
@@ -82,7 +71,6 @@ public class Encounter {
                 ", patient=" + patient +
                 ", doctor=" + doctor +
                 ", date=" + date +
-                ", observations=" + observations +
                 '}';
     }
 }

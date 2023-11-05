@@ -25,6 +25,8 @@ public class Doctor extends User{
         this.doctorEncounters = doctorEncounters;
     }
 
+    @OneToMany(mappedBy = "doctor")
+    private List<Observation> observations;
     @Override
     public String toString() {
         return "Doctor{" +
