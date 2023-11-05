@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Encounter {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "encounter_id")
     private long encounterId;
     @ManyToOne()

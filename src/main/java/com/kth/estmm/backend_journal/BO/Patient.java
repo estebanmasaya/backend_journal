@@ -1,5 +1,7 @@
 package com.kth.estmm.backend_journal.BO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,11 +10,14 @@ import java.util.List;
 public class Patient extends User{
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Encounter> patientEncounters;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Condition> patientConditions;
 
     @OneToMany(mappedBy = "patient")
+    @JsonManagedReference
     private List<Observation> observations;
 
     public Patient() {
@@ -37,6 +42,14 @@ public class Patient extends User{
 
     public void setPatientConditions(List<Condition> patientConditions) {
         this.patientConditions = patientConditions;
+    }
+
+    public List<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(List<Observation> observations) {
+        this.observations = observations;
     }
 
     @Override

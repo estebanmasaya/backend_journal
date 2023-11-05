@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Conversation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "conversation_id")
     long conversation_id;
 

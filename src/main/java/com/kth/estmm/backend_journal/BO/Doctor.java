@@ -1,14 +1,20 @@
 package com.kth.estmm.backend_journal.BO;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
-public class Doctor extends User{
+public class Doctor extends User {
 
     @OneToMany(mappedBy = "doctor")
+    @JsonManagedReference
     List<Encounter> doctorEncounters;
+
+    @OneToMany(mappedBy = "doctorOrStaff")
+    @JsonManagedReference
+    private List<Observation> observations;
 
     public Doctor() {
     }
@@ -25,8 +31,14 @@ public class Doctor extends User{
         this.doctorEncounters = doctorEncounters;
     }
 
-    @OneToMany(mappedBy = "doctor")
-    private List<Observation> observations;
+    public List<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(List<Observation> observations) {
+        this.observations = observations;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +

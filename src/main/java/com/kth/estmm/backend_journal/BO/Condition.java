@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity(name = "\"condition\"")
 public class Condition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "condition_id")
     private long conditionId;
     @ManyToOne
