@@ -2,6 +2,7 @@ package com.kth.estmm.backend_journal.BO;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Patient extends User{
@@ -14,9 +15,9 @@ public class Patient extends User{
     public Patient() {
     }
 
-    public Patient(String name, String email, String password, List<Encounter> patientEncounters) {
+    public Patient(String name, String email, String password) {
         super(name, email, password);
-        this.patientEncounters = patientEncounters;
+        this.patientEncounters = new ArrayList<>();
     }
 
     public List<Encounter> getPatientEncounters() {
