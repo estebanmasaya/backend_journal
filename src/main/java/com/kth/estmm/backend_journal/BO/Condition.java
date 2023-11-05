@@ -1,6 +1,7 @@
 package com.kth.estmm.backend_journal.BO;
 
 import jakarta.persistence.*;
+
 @Entity(name = "\"condition\"")
 public class Condition {
     @Id
@@ -10,6 +11,7 @@ public class Condition {
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
+
 
     private String description;
 

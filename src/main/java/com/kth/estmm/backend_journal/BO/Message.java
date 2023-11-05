@@ -22,5 +22,4 @@ public class Message {
     private Doctor doctor;
     private LocalDateTime date;
 
-
 }
