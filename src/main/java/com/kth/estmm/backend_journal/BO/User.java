@@ -4,21 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@MappedSuperclass
-public class User {
-
-    public User() {
-    }
-
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private long id;
 
     private String name;
@@ -30,6 +22,15 @@ public class User {
     private String email;
 
     private String password;
+
+    public User() {
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getName() {
         return name;

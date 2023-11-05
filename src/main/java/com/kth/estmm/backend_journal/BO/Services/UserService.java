@@ -10,7 +10,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Iterable<User> getAllUsers() {
+/*    public Iterable<User> getAllUsers() {
         return userRepository.findAll();
 
     }
@@ -19,7 +19,7 @@ public class UserService {
         User newUser = new User(name, email, password);
         userRepository.save(newUser);
         return true;
-    }
+    }*/
 
 
 }

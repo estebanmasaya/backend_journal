@@ -34,4 +34,55 @@ public class Encounter {
         this.doctor = doctor;
         this.date = date;
     }
+
+    public long getEncounterId() {
+        return encounterId;
+    }
+
+    public void setEncounterId(long encounterId) {
+        this.encounterId = encounterId;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public List<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(List<Observation> observations) {
+        this.observations = observations;
+    }
+
+    @Override
+    public String toString() {
+        return "Encounter{" +
+                "encounterId=" + encounterId +
+                ", patient=" + patient +
+                ", doctor=" + doctor +
+                ", date=" + date +
+                ", observations=" + observations +
+                '}';
+    }
 }
