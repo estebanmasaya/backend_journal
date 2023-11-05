@@ -5,22 +5,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
-
-    public User() {
-    }
-
-    public User(String name, String email, String password, Role role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private long userId;
+    private long id;
 
     private String name;
     @Column(
@@ -31,17 +22,15 @@ public class User {
     private String email;
 
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Encounter> patientEncounters;
+    public User() {
+    }
 
-    @OneToMany(mappedBy = "doctor")
-    List<Encounter> doctorEncounters;
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Condition> patientConditions;
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getName() {
         return name;
@@ -67,22 +56,14 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.kth.estmm.backend_journal.BO;
 
 import jakarta.persistence.*;
 
+import javax.print.Doc;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,11 +15,11 @@ public class Message {
     private long messageId;
     @ManyToOne()
     @JoinColumn(name = "patient_id")
-    private User patient;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-    private User doctor;
+    private Doctor doctor;
     private LocalDateTime date;
 
 }
