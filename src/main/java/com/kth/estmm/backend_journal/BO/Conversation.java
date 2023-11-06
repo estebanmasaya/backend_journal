@@ -1,5 +1,7 @@
 package com.kth.estmm.backend_journal.BO;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,7 @@ public class Conversation {
     @JoinColumn(name = "receiver_id")
     private User receiver;
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Message> messageList;
 
     private LocalDateTime latestTimestamp;

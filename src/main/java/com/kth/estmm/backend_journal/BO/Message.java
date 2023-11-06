@@ -1,5 +1,6 @@
 package com.kth.estmm.backend_journal.BO;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import javax.print.Doc;
@@ -16,17 +17,18 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "conversation_id")
+    @JsonBackReference
     private Conversation conversation;
-    private String message_content;
+    private String messageContent;
     private LocalDateTime timestamp;
 
 
     public Message() {
     }
 
-    public Message(Conversation conversation, String message_content, LocalDateTime timestamp) {
+    public Message(Conversation conversation, String messageContent, LocalDateTime timestamp) {
         this.conversation = conversation;
-        this.message_content = message_content;
+        this.messageContent = messageContent;
         this.timestamp = timestamp;
     }
 
@@ -47,11 +49,11 @@ public class Message {
     }
 
     public String getMessage_content() {
-        return message_content;
+        return messageContent;
     }
 
     public void setMessage_content(String message_content) {
-        this.message_content = message_content;
+        this.messageContent = message_content;
     }
 
     public LocalDateTime getTimestamp() {
@@ -67,7 +69,7 @@ public class Message {
         return "Message{" +
                 "messageId=" + messageId +
                 ", conversation=" + conversation +
-                ", message_content='" + message_content + '\'' +
+                ", message_content='" + messageContent + '\'' +
                 ", timestamp=" + timestamp +
                 '}';
     }

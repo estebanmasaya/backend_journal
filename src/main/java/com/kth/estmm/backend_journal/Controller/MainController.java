@@ -1,10 +1,7 @@
 package com.kth.estmm.backend_journal.Controller;
 
-import com.kth.estmm.backend_journal.BO.Doctor;
-import com.kth.estmm.backend_journal.BO.Observation;
-import com.kth.estmm.backend_journal.BO.Patient;
+import com.kth.estmm.backend_journal.BO.*;
 import com.kth.estmm.backend_journal.BO.Services.*;
-import com.kth.estmm.backend_journal.BO.Staff;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,13 +17,15 @@ public class MainController {
     private StaffService staffService;
 
     private ObservationService observationService;
+    private ConversationService conversationService;
 
-    public MainController(EncounterService encounterService, PatientService patientService, DoctorService doctorService, ObservationService observationService, StaffService staffService) {
+    public MainController(EncounterService encounterService, PatientService patientService, DoctorService doctorService, ObservationService observationService, StaffService staffService, ConversationService conversationService) {
         this.observationService = observationService;
         this.encounterService = encounterService;
         this.patientService = patientService;
         this.doctorService = doctorService;
         this.staffService = staffService;
+        this.conversationService = conversationService;
     }
 
     // PATIENT
@@ -88,6 +87,12 @@ public class MainController {
     @PostMapping(path = "/addObservation")
     public boolean addObservation(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
         return observationService.addObservation(patientId, doctorOrStaffId, description);
+    }
+
+    // CONVERSATION
+    @PostMapping(path = "/startConversation")
+    public Conversation startNewConversation(@RequestParam long senderId, @RequestParam long receiverId, @RequestParam String messageContent){
+        return conversationService.startNewConversation(senderId, receiverId, messageContent);
     }
 
 
