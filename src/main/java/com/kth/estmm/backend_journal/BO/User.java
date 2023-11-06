@@ -22,8 +22,17 @@ public abstract class User {
     private String email;
 
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {
+    }
+
+    public User(String name, String email, String password, Role role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public User(String name, String email, String password) {
@@ -64,6 +73,13 @@ public abstract class User {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package com.kth.estmm.backend_journal.BO.Services;
 
 import com.kth.estmm.backend_journal.BO.Patient;
+import com.kth.estmm.backend_journal.BO.Role;
 import com.kth.estmm.backend_journal.Persistence.PatientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class PatientService {
     }
     public boolean addPatient(String name, String email, String password) {
         Patient newPatient = new Patient(name, email, password);
+
         patientRepository.save(newPatient);
         return true;
     }

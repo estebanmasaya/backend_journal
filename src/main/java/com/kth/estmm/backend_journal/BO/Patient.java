@@ -24,7 +24,7 @@ public class Patient extends User{
     }
 
     public Patient(String name, String email, String password) {
-        super(name, email, password);
+        super(name, email, password, Role.PATIENT);
         this.patientEncounters = new ArrayList<>();
     }
 

@@ -20,7 +20,7 @@ public class Doctor extends User {
     }
 
     public Doctor(String name, String email, String password) {
-        super(name, email, password);
+        super(name, email, password, Role.DOCTOR);
     }
 
     public List<Encounter> getDoctorEncounters() {

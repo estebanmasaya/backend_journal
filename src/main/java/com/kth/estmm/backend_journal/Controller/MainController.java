@@ -42,7 +42,6 @@ public class MainController {
     @PostMapping(path = "/addPatient")
     public boolean addPatient(@RequestParam String name, @RequestParam String email, @RequestParam String password){
         return patientService.addPatient(name, email, password);
-
     }
 
 
