@@ -4,23 +4,24 @@ import com.kth.estmm.backend_journal.BO.*;
 import com.kth.estmm.backend_journal.BO.Services.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.login.LoginException;
+
 @RestController
 @RequestMapping(path ="/journal")
+
 public class MainController {
 
 
     private EncounterService encounterService;
-
     private PatientService patientService;
-
     private DoctorService doctorService;
     private StaffService staffService;
-
     private ObservationService observationService;
     private ConversationService conversationService;
     private ConditionService conditionService;
+    private UserService userService;
 
-    public MainController(EncounterService encounterService, PatientService patientService, DoctorService doctorService, ObservationService observationService, StaffService staffService, ConversationService conversationService, ConditionService conditionService) {
+    public MainController(EncounterService encounterService, PatientService patientService, DoctorService doctorService, ObservationService observationService, StaffService staffService, ConversationService conversationService, ConditionService conditionService, UserService userService) {
         this.observationService = observationService;
         this.encounterService = encounterService;
         this.patientService = patientService;
@@ -28,7 +29,21 @@ public class MainController {
         this.staffService = staffService;
         this.conversationService = conversationService;
         this.conditionService = conditionService;
+        this.userService = userService;
     }
+
+    // USER
+    @GetMapping(path = "/login")
+    public @ResponseBody User login(@RequestParam String email, @RequestParam String password) throws LoginException {
+        return userService.login(email, password);
+    }
+
+    @GetMapping(path = "/userByEmail")
+    public @ResponseBody User getUserByEmail(@RequestParam String email){
+        return userService.getUserByEmail(email);
+    }
+
+
 
     // PATIENT
     @GetMapping(path = "/patients")
