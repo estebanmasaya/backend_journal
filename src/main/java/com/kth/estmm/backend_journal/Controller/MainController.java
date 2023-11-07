@@ -18,14 +18,16 @@ public class MainController {
 
     private ObservationService observationService;
     private ConversationService conversationService;
+    private ConditionService conditionService;
 
-    public MainController(EncounterService encounterService, PatientService patientService, DoctorService doctorService, ObservationService observationService, StaffService staffService, ConversationService conversationService) {
+    public MainController(EncounterService encounterService, PatientService patientService, DoctorService doctorService, ObservationService observationService, StaffService staffService, ConversationService conversationService, ConditionService conditionService) {
         this.observationService = observationService;
         this.encounterService = encounterService;
         this.patientService = patientService;
         this.doctorService = doctorService;
         this.staffService = staffService;
         this.conversationService = conversationService;
+        this.conditionService = conditionService;
     }
 
     // PATIENT
@@ -39,7 +41,7 @@ public class MainController {
         return patientService.getPatientById(id);
     }
     @PostMapping(path = "/addPatient")
-    public boolean addPatient(@RequestParam String name, @RequestParam String email, @RequestParam String password){
+    public Patient addPatient(@RequestParam String name, @RequestParam String email, @RequestParam String password){
         return patientService.addPatient(name, email, password);
     }
 
@@ -56,7 +58,7 @@ public class MainController {
         return doctorService.getDoctorById(id);
     }
     @PostMapping(path = "/addDoctor")
-    public boolean addDoctor(@RequestParam String name, @RequestParam String email, @RequestParam String password){
+    public Doctor addDoctor(@RequestParam String name, @RequestParam String email, @RequestParam String password){
         return doctorService.addDoctor(name, email, password);
 
     }
@@ -73,7 +75,7 @@ public class MainController {
         return staffService.getStaffById(id);
     }
     @PostMapping(path = "/addStaff")
-    public boolean addStaff(@RequestParam String name, @RequestParam String email, @RequestParam String password){
+    public Staff addStaff(@RequestParam String name, @RequestParam String email, @RequestParam String password){
         return staffService.addStaff(name, email, password);
 
     }
@@ -85,7 +87,7 @@ public class MainController {
     }
 
     @PostMapping(path = "/addObservation")
-    public boolean addObservation(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
+    public Observation addObservation(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
         return observationService.addObservation(patientId, doctorOrStaffId, description);
     }
 
@@ -93,6 +95,17 @@ public class MainController {
     @PostMapping(path = "/startConversation")
     public Conversation startNewConversation(@RequestParam long senderId, @RequestParam long receiverId, @RequestParam String messageContent){
         return conversationService.startNewConversation(senderId, receiverId, messageContent);
+    }
+
+    @PostMapping(path = "/newMessage")
+    public Conversation newMessage(@RequestParam long conversationId, @RequestParam String messageContent) {
+        return conversationService.newMessage(conversationId, messageContent);
+    }
+
+    // CONDITION
+    @PostMapping(path = "/addCondition")
+    public Condition addCondition(@RequestParam long patientId, @RequestParam String description){
+        return conditionService.addCondition(patientId, description);
     }
 
 

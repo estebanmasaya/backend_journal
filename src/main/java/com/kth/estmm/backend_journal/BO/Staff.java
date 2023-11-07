@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class Staff extends User{
 
     public Staff(String name, String email, String password) {
         super(name, email, password, Role.STAFF);
+        observations = new ArrayList<>();
     }
 
     public List<Observation> getObservations() {

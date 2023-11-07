@@ -17,10 +17,12 @@ public class Conversation {
 
     @ManyToOne()
     @JoinColumn(name = "sender_id")
+    @JsonBackReference
     private User sender;
 
     @ManyToOne
     @JoinColumn(name = "receiver_id")
+    @JsonBackReference
     private User receiver;
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

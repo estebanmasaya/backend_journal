@@ -4,6 +4,7 @@ package com.kth.estmm.backend_journal.BO;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Doctor extends User {
@@ -21,6 +22,8 @@ public class Doctor extends User {
 
     public Doctor(String name, String email, String password) {
         super(name, email, password, Role.DOCTOR);
+        observations = new ArrayList<>();
+        doctorEncounters = new ArrayList<>();
     }
 
     public List<Encounter> getDoctorEncounters() {

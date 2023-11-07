@@ -1,6 +1,7 @@
 package com.kth.estmm.backend_journal.BO.Services;
 
 import com.kth.estmm.backend_journal.BO.Conversation;
+import com.kth.estmm.backend_journal.BO.Message;
 import com.kth.estmm.backend_journal.BO.User;
 import com.kth.estmm.backend_journal.Persistence.ConversationRepository;
 import com.kth.estmm.backend_journal.Persistence.UserRepository;
@@ -20,6 +21,12 @@ public class ConversationService {
         User sender = userRepository.findById(senderId).orElseThrow(()-> new EntityNotFoundException("No sender found with id: " + senderId));
         User receiver = userRepository.findById(receiverId).orElseThrow(()-> new EntityNotFoundException("No receiver found with id: " + receiverId));
         Conversation conversation = new Conversation(sender, receiver);
+        conversation.addMessage(messageContent);
+        return conversationRepository.save(conversation);
+    }
+
+    public Conversation newMessage(long conversationId, String messageContent) {
+        Conversation conversation = conversationRepository.findById(conversationId).orElseThrow(()-> new EntityNotFoundException("No conversation found with id: " + conversationId));
         conversation.addMessage(messageContent);
         return conversationRepository.save(conversation);
     }

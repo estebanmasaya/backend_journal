@@ -18,8 +18,7 @@ public class Condition {
     public Condition() {
     }
 
-    public Condition(long conditionId, Patient patient, String description) {
-        this.conditionId = conditionId;
+    public Condition(Patient patient, String description) {
         this.patient = patient;
         this.description = description;
     }

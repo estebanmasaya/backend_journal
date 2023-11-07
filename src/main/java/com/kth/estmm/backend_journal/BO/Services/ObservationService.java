@@ -1,6 +1,5 @@
 package com.kth.estmm.backend_journal.BO.Services;
 
-import com.kth.estmm.backend_journal.BO.Doctor;
 import com.kth.estmm.backend_journal.BO.Observation;
 import com.kth.estmm.backend_journal.BO.Patient;
 import com.kth.estmm.backend_journal.BO.User;
@@ -23,7 +22,7 @@ public class ObservationService {
     @Autowired
     private StaffRepository staffRepository;
 
-    public boolean addObservation(long patientId, long doctorOrStaffId, String description) {
+    public Observation addObservation(long patientId, long doctorOrStaffId, String description) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("Patient not found with id " + patientId));
         User doctorOrStaff;
         if(doctorRepository.existsById(doctorOrStaffId)){
@@ -35,8 +34,7 @@ public class ObservationService {
         else{
             throw new EntityNotFoundException("No Doctor or Staff found with id " + doctorOrStaffId);
         }
-        observationRepository.save(new Observation(patient, doctorOrStaff, description));
-        return true;
+        return observationRepository.save(new Observation(patient, doctorOrStaff, description));
     }
 
     public Iterable<Observation> getAllObservations() {
