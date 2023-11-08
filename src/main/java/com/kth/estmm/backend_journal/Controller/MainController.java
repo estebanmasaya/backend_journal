@@ -37,14 +37,10 @@ public class MainController {
     public @ResponseBody User login(@RequestParam String email, @RequestParam String password) throws LoginException {
         return userService.login(email, password);
     }
-
     @GetMapping(path = "/userByEmail")
     public @ResponseBody User getUserByEmail(@RequestParam String email){
         return userService.getUserByEmail(email);
     }
-
-
-
     // PATIENT
     @GetMapping(path = "/patients")
     public @ResponseBody Iterable<Patient> getAllPatients(){
@@ -110,6 +106,15 @@ public class MainController {
     @PostMapping(path = "/startConversation")
     public Conversation startNewConversation(@RequestParam long senderId, @RequestParam long receiverId, @RequestParam String messageContent){
         return conversationService.startNewConversation(senderId, receiverId, messageContent);
+    }
+    @GetMapping(path = "/getAllConversations")
+    public @ResponseBody Iterable<Conversation> getAllConversations(){
+        return conversationService.getAllConversations();
+    }
+
+    @GetMapping(path = "/conversationById")
+    public @ResponseBody Conversation getConversationById(@RequestParam long id){
+        return conversationService.getConversationById(id);
     }
 
     @PostMapping(path = "/newMessage")
