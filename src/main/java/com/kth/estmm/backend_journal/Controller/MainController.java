@@ -102,9 +102,14 @@ public class MainController {
         return observationService.getAllObservations();
     }
 
-    @PostMapping(path = "/addObservation")
-    public Observation addObservation(@RequestParam long encounterId, @RequestParam String description){
-        return observationService.addObservation(encounterId, description);
+    @PostMapping(path = "/addObservationByEncounterId")
+    public Observation addObservationByEncounterId(@RequestParam long encounterId, @RequestParam String description){
+        return observationService.addObservationByEncounterId(encounterId, description);
+    }
+
+    @PostMapping(path = "/addObservationAndEncounter")
+    public Observation addObservationAndEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
+        return observationService.addObservationAndEncounter(patientId, doctorOrStaffId, description);
     }
 
     @GetMapping(path = "/observationsByEncounterId")

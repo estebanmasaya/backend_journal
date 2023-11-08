@@ -24,11 +24,26 @@ public class ObservationService {
     @Autowired
     private EncounterRepository encounterRepository;
 
-    public Observation addObservation(long encounterId, String description) {
+    public Observation addObservationByEncounterId(long encounterId, String description) {
         Encounter encounter = encounterRepository.findById(encounterId).orElseThrow(()-> new EntityNotFoundException("No encounter found with id: " + encounterId));
         return observationRepository.save(new Observation(encounter, description));
     }
 
+    public Observation addObservationAndEncounter(long patientId, long doctorOrStaffId, String description){
+        Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("no Patient found with id: " + patientId));
+        User doctorOrStaff;
+        if(doctorRepository.existsById(doctorOrStaffId)){
+            doctorOrStaff =doctorRepository.findById(doctorOrStaffId).get();
+        }
+        else if (staffRepository.existsById(doctorOrStaffId)){
+            doctorOrStaff = staffRepository.findById(doctorOrStaffId).get();
+        }
+        else{
+            throw new EntityNotFoundException("No Doctor or Staff found with id " + doctorOrStaffId);
+        }
+        Encounter encounter = encounterRepository.save(new Encounter(patient, doctorOrStaff));
+        return addObservationByEncounterId(encounter.getEncounterId(), description);
+    }
     public Iterable<Observation> getAllObservations() {
         return observationRepository.findAll();
     }
