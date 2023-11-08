@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EncounterService {
@@ -29,7 +30,7 @@ public class EncounterService {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException(""));
         User doctorOrStaff;
         if(doctorRepository.existsById(doctorOrStaffId)){
-            doctorOrStaff =doctorRepository.findById(doctorOrStaffId).get();
+            doctorOrStaff =doctorRepository.findById(doctorOrStaffId).get   ();
         }
         else if (staffRepository.existsById(doctorOrStaffId)){
             doctorOrStaff = staffRepository.findById(doctorOrStaffId).get();
@@ -40,5 +41,10 @@ public class EncounterService {
 
         Encounter encounter = new Encounter(patient, doctorOrStaff);
         return encounterRepository.save(encounter);
+    }
+
+    public List<Encounter> getEncountersByPatientId(long patientId) {
+        Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("no Patient found with id: " + patientId));
+        return encounterRepository.findAllByPatient(patient);
     }
 }

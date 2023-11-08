@@ -9,6 +9,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ObservationService {
     @Autowired
@@ -29,5 +31,10 @@ public class ObservationService {
 
     public Iterable<Observation> getAllObservations() {
         return observationRepository.findAll();
+    }
+
+    public List<Observation> getObservationsByEncounterId(long encounterId) {
+        Encounter encounter = encounterRepository.findById(encounterId).orElseThrow(()-> new EntityNotFoundException("No encounter found with id: " + encounterId));
+        return observationRepository.findAllByEncounter(encounter);
     }
 }

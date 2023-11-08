@@ -5,7 +5,7 @@ import com.kth.estmm.backend_journal.BO.Services.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping(path ="/journal")
@@ -107,6 +107,11 @@ public class MainController {
         return observationService.addObservation(encounterId, description);
     }
 
+    @GetMapping(path = "/observationsByEncounterId")
+    public List<Observation> getObservationsByEncounterId(@RequestParam long encounterId){
+        return observationService.getObservationsByEncounterId( encounterId);
+    }
+
     // CONVERSATION
     @PostMapping(path = "/startConversation")
     public Conversation startNewConversation(@RequestParam long senderId, @RequestParam long receiverId, @RequestParam String messageContent){
@@ -124,6 +129,11 @@ public class MainController {
         return conditionService.addCondition(patientId, description);
     }
 
+    @GetMapping(path ="/conditionsByPatientId")
+    public List<Condition> getConditionsByPatientId(@RequestParam long patientId){
+        return conditionService.getConditionsByPatientId(patientId);
+    }
+
 
     // ENCOUNTER
 
@@ -131,6 +141,12 @@ public class MainController {
     public Encounter addEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId){
         return encounterService.addEncounter(patientId, doctorOrStaffId);
     }
+
+    @GetMapping(path ="/encountersByPatientId")
+    public List<Encounter> getEncountersByPatientId(@RequestParam long patientId){
+        return encounterService.getEncountersByPatientId(patientId);
+    }
+
 
 
 
