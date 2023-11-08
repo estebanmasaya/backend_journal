@@ -1,5 +1,6 @@
 package com.kth.estmm.backend_journal.BO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public abstract class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
