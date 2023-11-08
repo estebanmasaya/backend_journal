@@ -1,8 +1,11 @@
 package com.kth.estmm.backend_journal.BO;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,12 +16,18 @@ public class Encounter {
     private long encounterId;
     @ManyToOne()
     @JoinColumn(name = "patient_id")
+    @JsonBackReference
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @JoinColumn(name = "doctor_or_staff_id")
+    @JsonBackReference
+    private User doctorOrStaff;
     private LocalDateTime date;
+
+    @OneToMany(mappedBy = "encounter")
+    @JsonManagedReference
+    private List<Observation> observations;
 
 
     public Encounter() {
@@ -26,10 +35,11 @@ public class Encounter {
 
 
 
-    public Encounter(Patient patient, Doctor doctor, LocalDateTime date) {
+    public Encounter(Patient patient, User doctorOrStaff) {
         this.patient = patient;
-        this.doctor = doctor;
-        this.date = date;
+        this.doctorOrStaff = doctorOrStaff;
+        this.date = LocalDateTime.now();
+        this.observations = new ArrayList<>();
     }
 
     public long getEncounterId() {
@@ -48,12 +58,20 @@ public class Encounter {
         this.patient = patient;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public User getDoctorOrStaff() {
+        return doctorOrStaff;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorOrStaff(User doctorOrStaff) {
+        this.doctorOrStaff = doctorOrStaff;
+    }
+
+    public List<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(List<Observation> observations) {
+        this.observations = observations;
     }
 
     public LocalDateTime getDate() {
@@ -69,8 +87,9 @@ public class Encounter {
         return "Encounter{" +
                 "encounterId=" + encounterId +
                 ", patient=" + patient +
-                ", doctor=" + doctor +
+                ", doctorOrStaff=" + doctorOrStaff +
                 ", date=" + date +
+                ", observations=" + observations +
                 '}';
     }
 }

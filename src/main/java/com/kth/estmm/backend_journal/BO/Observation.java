@@ -12,27 +12,27 @@ public class Observation {
     @Column(name = "observation_id")
     private long observationId;
 
-    @ManyToOne()
-    @JoinColumn(name = "patient_id")
-    @JsonBackReference
-    private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_or_staff_id")
+    @JoinColumn(name= "encounter_id")
     @JsonBackReference
-    private User doctorOrStaff;
-    private LocalDateTime date;
-
+    private Encounter encounter;
     private String description;
 
     public Observation() {
     }
 
-    public Observation(Patient patient, User doctorOrStaff, String description) {
-        this.patient = patient;
-        this.doctorOrStaff = doctorOrStaff;
+    public Observation(Encounter encounter, String description) {
+        this.encounter = encounter;
         this.description = description;
-        this.date = LocalDateTime.now();
+    }
+
+    public Encounter getEncounter() {
+        return encounter;
+    }
+
+    public void setEncounter(Encounter encounter) {
+        this.encounter = encounter;
     }
 
     public void setObservationId(long observationId) {
@@ -49,30 +49,6 @@ public class Observation {
 
     public long getObservationId() {
         return observationId;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public User getDoctorOrStaff() {
-        return doctorOrStaff;
-    }
-
-    public void setDoctorOrStaff(User doctorOrStaff) {
-        this.doctorOrStaff = doctorOrStaff;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
     }
 
     @Override

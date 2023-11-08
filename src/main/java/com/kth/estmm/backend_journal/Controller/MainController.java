@@ -5,6 +5,7 @@ import com.kth.estmm.backend_journal.BO.Services.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path ="/journal")
@@ -97,9 +98,19 @@ public class MainController {
         return observationService.getAllObservations();
     }
 
-    @PostMapping(path = "/addObservation")
-    public Observation addObservation(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
-        return observationService.addObservation(patientId, doctorOrStaffId, description);
+    @PostMapping(path = "/addObservationByEncounterId")
+    public Observation addObservationByEncounterId(@RequestParam long encounterId, @RequestParam String description){
+        return observationService.addObservationByEncounterId(encounterId, description);
+    }
+
+    @PostMapping(path = "/addObservationAndEncounter")
+    public Observation addObservationAndEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
+        return observationService.addObservationAndEncounter(patientId, doctorOrStaffId, description);
+    }
+
+    @GetMapping(path = "/observationsByEncounterId")
+    public List<Observation> getObservationsByEncounterId(@RequestParam long encounterId){
+        return observationService.getObservationsByEncounterId( encounterId);
     }
 
     // CONVERSATION
@@ -128,13 +139,24 @@ public class MainController {
         return conditionService.addCondition(patientId, description);
     }
 
+    @GetMapping(path ="/conditionsByPatientId")
+    public List<Condition> getConditionsByPatientId(@RequestParam long patientId){
+        return conditionService.getConditionsByPatientId(patientId);
+    }
 
 
+    // ENCOUNTER
 
-/*    @PostMapping(path="/addEncounter")
-    public boolean addEncounter(@RequestParam long patientId, @RequestParam long doctorId, @RequestParam LocalDateTime date){
-        return encounterService.addEncounter(patientId, doctorId, date);
-    }*/
+    @PostMapping(path="/addEncounter")
+    public Encounter addEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId){
+        return encounterService.addEncounter(patientId, doctorOrStaffId);
+    }
+
+    @GetMapping(path ="/encountersByPatientId")
+    public List<Encounter> getEncountersByPatientId(@RequestParam long patientId){
+        return encounterService.getEncountersByPatientId(patientId);
+    }
+
 
 
 
