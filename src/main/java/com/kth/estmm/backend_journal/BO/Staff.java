@@ -12,7 +12,7 @@ public class Staff extends User{
 
     @OneToMany(mappedBy = "doctorOrStaff")
     @JsonManagedReference
-    private List<Observation> observations;
+    private List<Encounter> encounters;
 
 
     public Staff() {
@@ -20,21 +20,20 @@ public class Staff extends User{
 
     public Staff(String name, String email, String password) {
         super(name, email, password, Role.STAFF);
-        observations = new ArrayList<>();
     }
 
-    public List<Observation> getObservations() {
-        return observations;
+    public List<Encounter> getEncounters() {
+        return encounters;
     }
 
-    public void setObservations(List<Observation> observations) {
-        this.observations = observations;
+    public void setEncounters(List<Encounter> encounters) {
+        this.encounters = encounters;
     }
 
     @Override
     public String toString() {
         return "Staff{" +
-                "observations=" + observations +
+                "encounters=" + encounters +
                 '}';
     }
 }

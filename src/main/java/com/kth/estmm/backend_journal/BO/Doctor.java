@@ -9,43 +9,30 @@ import java.util.List;
 @Entity
 public class Doctor extends User {
 
-    @OneToMany(mappedBy = "doctor")
-    @JsonManagedReference
-    List<Encounter> doctorEncounters;
-
     @OneToMany(mappedBy = "doctorOrStaff")
     @JsonManagedReference
-    private List<Observation> observations;
+    List<Encounter> encounters;
 
     public Doctor() {
     }
 
     public Doctor(String name, String email, String password) {
         super(name, email, password, Role.DOCTOR);
-        observations = new ArrayList<>();
-        doctorEncounters = new ArrayList<>();
+        encounters = new ArrayList<>();
     }
 
-    public List<Encounter> getDoctorEncounters() {
-        return doctorEncounters;
+    public List<Encounter> getEncounters() {
+        return encounters;
     }
 
-    public void setDoctorEncounters(List<Encounter> doctorEncounters) {
-        this.doctorEncounters = doctorEncounters;
-    }
-
-    public List<Observation> getObservations() {
-        return observations;
-    }
-
-    public void setObservations(List<Observation> observations) {
-        this.observations = observations;
+    public void setEncounters(List<Encounter> encounters) {
+        this.encounters = encounters;
     }
 
     @Override
     public String toString() {
         return "Doctor{" +
-                "doctorEncounters=" + doctorEncounters +
+                "doctorEncounters=" + encounters +
                 '}';
     }
 }

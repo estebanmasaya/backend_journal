@@ -1,9 +1,10 @@
 package com.kth.estmm.backend_journal.BO.Services;
 
 import com.kth.estmm.backend_journal.BO.Encounter;
+import com.kth.estmm.backend_journal.BO.Patient;
 import com.kth.estmm.backend_journal.BO.User;
-import com.kth.estmm.backend_journal.Persistence.EncounterRepository;
-import com.kth.estmm.backend_journal.Persistence.UserRepository;
+import com.kth.estmm.backend_journal.Persistence.*;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,27 @@ public class EncounterService {
     private EncounterRepository encounterRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PatientRepository patientRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
+    @Autowired
+    private StaffRepository staffRepository;
 
-/*    public boolean addEncounter(long patientId, long doctorId, LocalDateTime date) {
-        User patient = userRepository.findById(patientId).get();
-        User doctor = userRepository.findById(doctorId).get();
+    public Encounter addEncounter(long patientId, long doctorOrStaffId) {
+        Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException(""));
+        User doctorOrStaff;
+        if(doctorRepository.existsById(doctorOrStaffId)){
+            doctorOrStaff =doctorRepository.findById(doctorOrStaffId).get();
+        }
+        else if (staffRepository.existsById(doctorOrStaffId)){
+            doctorOrStaff = staffRepository.findById(doctorOrStaffId).get();
+        }
+        else{
+            throw new EntityNotFoundException("No Doctor or Staff found with id " + doctorOrStaffId);
+        }
 
-        Encounter encounter = new Encounter(doctor, patient, date);
-        encounterRepository.save(encounter);
-        return true;
-    }*/
+        Encounter encounter = new Encounter(patient, doctorOrStaff);
+        return encounterRepository.save(encounter);
+    }
 }

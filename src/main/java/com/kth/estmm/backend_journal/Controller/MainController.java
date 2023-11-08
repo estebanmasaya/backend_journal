@@ -5,6 +5,7 @@ import com.kth.estmm.backend_journal.BO.Services.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(path ="/journal")
@@ -102,8 +103,8 @@ public class MainController {
     }
 
     @PostMapping(path = "/addObservation")
-    public Observation addObservation(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
-        return observationService.addObservation(patientId, doctorOrStaffId, description);
+    public Observation addObservation(@RequestParam long encounterId, @RequestParam String description){
+        return observationService.addObservation(encounterId, description);
     }
 
     // CONVERSATION
@@ -124,12 +125,12 @@ public class MainController {
     }
 
 
+    // ENCOUNTER
 
-
-/*    @PostMapping(path="/addEncounter")
-    public boolean addEncounter(@RequestParam long patientId, @RequestParam long doctorId, @RequestParam LocalDateTime date){
-        return encounterService.addEncounter(patientId, doctorId, date);
-    }*/
+    @PostMapping(path="/addEncounter")
+    public Encounter addEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId){
+        return encounterService.addEncounter(patientId, doctorOrStaffId);
+    }
 
 
 
