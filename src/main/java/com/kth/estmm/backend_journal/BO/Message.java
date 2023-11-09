@@ -21,15 +21,25 @@ public class Message {
     private Conversation conversation;
     private String messageContent;
     private LocalDateTime timestamp;
-
-
+    private long senderId;
+    private long receiverId;
     public Message() {
     }
 
-    public Message(Conversation conversation, String messageContent, LocalDateTime timestamp) {
+    public Message(Conversation conversation, String messageContent, LocalDateTime timestamp, long senderId, long receiverId) {
         this.conversation = conversation;
         this.messageContent = messageContent;
         this.timestamp = timestamp;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+    }
+
+    public long getSenderId() {
+        return senderId;
+    }
+
+    public long getReceiverId() {
+        return receiverId;
     }
 
     public long getMessageId() {

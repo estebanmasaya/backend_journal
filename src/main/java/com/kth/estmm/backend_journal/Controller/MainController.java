@@ -2,6 +2,7 @@ package com.kth.estmm.backend_journal.Controller;
 
 import com.kth.estmm.backend_journal.BO.*;
 import com.kth.estmm.backend_journal.BO.Services.*;
+import com.kth.estmm.backend_journal.DTO.MessageDTO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
@@ -57,8 +58,6 @@ public class MainController {
         return patientService.addPatient(name, email, password);
     }
 
-
-
     // DOCTOR
     @GetMapping(path = "/doctors")
     public @ResponseBody Iterable<Doctor> getAllDoctors(){
@@ -76,7 +75,6 @@ public class MainController {
     }
 
     // STAFF
-
     @GetMapping(path = "/staff")
     public @ResponseBody Iterable<Staff> getAllStaff(){
         return staffService.getAllStaff();
@@ -123,14 +121,28 @@ public class MainController {
         return conversationService.getAllConversations();
     }
 
-    @GetMapping(path = "/conversationById")
+    @GetMapping(path = "/getAllConversationsById")
+    public @ResponseBody Iterable<Conversation> getAllConversationsById(long id){
+        return conversationService.getAllConversationsById(id);
+    }
+
+    @GetMapping(path = "/getConversationById")
     public @ResponseBody Conversation getConversationById(@RequestParam long id){
         return conversationService.getConversationById(id);
     }
 
+    @GetMapping(path = "/getMessagesById")
+    public @ResponseBody List<MessageDTO> getMessagesById(@RequestParam long id){
+        return (List<MessageDTO>) conversationService.getMessagesById(id);
+    }
+
+    @PostMapping(path = "/removeConversationById")
+    public void newMessage(@RequestParam long conversationId) {
+        conversationService.removeConversationById(conversationId);
+    }
     @PostMapping(path = "/newMessage")
-    public Conversation newMessage(@RequestParam long conversationId, @RequestParam String messageContent) {
-        return conversationService.newMessage(conversationId, messageContent);
+    public Conversation newMessage(@RequestParam long conversationId, @RequestParam String messageContent, @RequestParam long senderId, @RequestParam long receiverId) {
+        return conversationService.newMessage(conversationId, messageContent, senderId, receiverId);
     }
 
     // CONDITION
@@ -144,9 +156,7 @@ public class MainController {
         return conditionService.getConditionsByPatientId(patientId);
     }
 
-
     // ENCOUNTER
-
     @PostMapping(path="/addEncounter")
     public Encounter addEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId){
         return encounterService.addEncounter(patientId, doctorOrStaffId);
@@ -156,9 +166,4 @@ public class MainController {
     public List<Encounter> getEncountersByPatientId(@RequestParam long patientId){
         return encounterService.getEncountersByPatientId(patientId);
     }
-
-
-
-
-
 }

@@ -38,9 +38,9 @@ public class Conversation {
         this.messageList = new ArrayList<>();
     }
 
-    public boolean addMessage(String messageContent){
+    public boolean addMessage(String messageContent, long senderId, long receiverId){
         this.latestTimestamp = LocalDateTime.now();
-        Message message = new Message(this, messageContent, this.latestTimestamp);
+        Message message = new Message(this, messageContent, this.latestTimestamp, senderId, receiverId);
         return messageList.add(message);
     }
 
