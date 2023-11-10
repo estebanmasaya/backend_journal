@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ConditionRepository extends CrudRepository<Condition, Long> {
     public List<Condition> findAllByPatient (Patient patient);
+    List<Condition> findByPatient(Patient patient);
 }

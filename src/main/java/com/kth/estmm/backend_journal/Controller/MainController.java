@@ -3,6 +3,7 @@ package com.kth.estmm.backend_journal.Controller;
 import com.kth.estmm.backend_journal.BO.*;
 import com.kth.estmm.backend_journal.BO.Services.*;
 import com.kth.estmm.backend_journal.DTO.MessageDTO;
+import com.kth.estmm.backend_journal.DTO.PatientInfoDTO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
@@ -56,6 +57,11 @@ public class MainController {
     @PostMapping(path = "/addPatient")
     public Patient addPatient(@RequestParam String name, @RequestParam String email, @RequestParam String password){
         return patientService.addPatient(name, email, password);
+    }
+
+    @GetMapping(path = "/getAllPatientInfoById")
+    public @ResponseBody Iterable<PatientInfoDTO> getAllPatientInfoById(@RequestParam long id){
+        return patientService.getAllPatientInfoById(id);
     }
 
     // DOCTOR
