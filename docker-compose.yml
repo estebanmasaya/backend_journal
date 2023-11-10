@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/journal
+      SPRING_DATASOURCE_USER: root
+      SPRING_DATASOURCE_PASSWORD: reine1234
+
+
+
+  db:
+    image: mysql
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: reine1234
+      MYSQL_DATABASE: journal
+    ports:
+      - 3307:3306
