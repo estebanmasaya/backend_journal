@@ -19,7 +19,7 @@ public class ConditionService {
     PatientRepository patientRepository;
 
 
-    public Condition addCondition(long patientId, String description) {
+/*    public Condition addCondition(long patientId, String description) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()->new EntityNotFoundException("No patient found with id: " + patientId));
         return conditionRepository.save(new Condition(patient, description));
     }
@@ -27,6 +27,6 @@ public class ConditionService {
     public List<Condition> getConditionsByPatientId(long patientId) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("no Patient found with id: " + patientId));
         return conditionRepository.findAllByPatient(patient);
-    }
+    }*/
 
 }

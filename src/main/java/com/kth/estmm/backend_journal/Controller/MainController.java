@@ -45,15 +45,18 @@ public class MainController {
         return userService.getUserByEmail(email);
     }
     // PATIENT
-    @GetMapping(path = "/patients")
+  /*  @GetMapping(path = "/patients")
     public @ResponseBody Iterable<Patient> getAllPatients(){
         return patientService.getAllPatients();
     }
+*/
+
 
     @GetMapping(path = "/patientById")
-    public @ResponseBody Patient getPatientById(@RequestParam long id){
-        return patientService.getPatientById(id);
+    public void getPatientById(@RequestParam long id){
+        patientService.getPatientById(id);
     }
+    /*
     @PostMapping(path = "/addPatient")
     public Patient addPatient(@RequestParam String name, @RequestParam String email, @RequestParam String password){
         return patientService.addPatient(name, email, password);
@@ -62,7 +65,7 @@ public class MainController {
     @GetMapping(path = "/getAllPatientInfoById")
     public @ResponseBody Iterable<PatientInfoDTO> getAllPatientInfoById(@RequestParam long id){
         return patientService.getAllPatientInfoById(id);
-    }
+    }*/
 
     // DOCTOR
     @GetMapping(path = "/doctors")
@@ -107,10 +110,10 @@ public class MainController {
         return observationService.addObservationByEncounterId(encounterId, description);
     }
 
-    @PostMapping(path = "/addObservationAndEncounter")
+/*    @PostMapping(path = "/addObservationAndEncounter")
     public Observation addObservationAndEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId, @RequestParam String description){
         return observationService.addObservationAndEncounter(patientId, doctorOrStaffId, description);
-    }
+    }*/
 
     @GetMapping(path = "/observationsByEncounterId")
     public List<Observation> getObservationsByEncounterId(@RequestParam long encounterId){
@@ -152,7 +155,7 @@ public class MainController {
     }
 
     // CONDITION
-    @PostMapping(path = "/addCondition")
+/*    @PostMapping(path = "/addCondition")
     public Condition addCondition(@RequestParam long patientId, @RequestParam String description){
         return conditionService.addCondition(patientId, description);
     }
@@ -160,16 +163,16 @@ public class MainController {
     @GetMapping(path ="/conditionsByPatientId")
     public List<Condition> getConditionsByPatientId(@RequestParam long patientId){
         return conditionService.getConditionsByPatientId(patientId);
-    }
+    }*/
 
     // ENCOUNTER
-    @PostMapping(path="/addEncounter")
+/*    @PostMapping(path="/addEncounter")
     public Encounter addEncounter(@RequestParam long patientId, @RequestParam long doctorOrStaffId){
         return encounterService.addEncounter(patientId, doctorOrStaffId);
-    }
+    }*/
 
-    @GetMapping(path ="/encountersByPatientId")
+/*    @GetMapping(path ="/encountersByPatientId")
     public List<Encounter> getEncountersByPatientId(@RequestParam long patientId){
         return encounterService.getEncountersByPatientId(patientId);
-    }
+    }*/
 }

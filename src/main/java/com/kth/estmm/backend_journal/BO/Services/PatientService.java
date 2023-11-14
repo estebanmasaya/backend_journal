@@ -25,12 +25,17 @@ public class PatientService {
     @Autowired
     private ConditionRepository conditionRepository;
 
+/*
     public Iterable<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
-    public Patient getPatientById(long id) {
-        return patientRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Patient not found with id " + id));
+*/
+
+    public void getPatientById(long id) {
+        patientRepository.getPatient(id);
     }
+
+    /*
     public Patient addPatient(String name, String email, String password) {
         Patient newPatient = new Patient(name, email, password);
         return patientRepository.save(newPatient);
@@ -67,6 +72,6 @@ public class PatientService {
         result.add(patientInfoDBO);
 
         return result;
-    }
+    }*/
 
 }

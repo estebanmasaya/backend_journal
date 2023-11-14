@@ -29,7 +29,7 @@ public class ObservationService {
         return observationRepository.save(new Observation(encounter, description));
     }
 
-    public Observation addObservationAndEncounter(long patientId, long doctorOrStaffId, String description){
+   /* public Observation addObservationAndEncounter(long patientId, long doctorOrStaffId, String description){
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("no Patient found with id: " + patientId));
         User doctorOrStaff;
         if(doctorRepository.existsById(doctorOrStaffId)){
@@ -43,7 +43,7 @@ public class ObservationService {
         }
         Encounter encounter = encounterRepository.save(new Encounter(patient, doctorOrStaff));
         return addObservationByEncounterId(encounter.getEncounterId(), description);
-    }
+    }*/
     public Iterable<Observation> getAllObservations() {
         return observationRepository.findAll();
     }

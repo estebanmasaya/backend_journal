@@ -26,7 +26,7 @@ public class EncounterService {
     @Autowired
     private StaffRepository staffRepository;
 
-    public Encounter addEncounter(long patientId, long doctorOrStaffId) {
+   /* public Encounter addEncounter(long patientId, long doctorOrStaffId) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException(""));
         User doctorOrStaff;
         if(doctorRepository.existsById(doctorOrStaffId)){
@@ -41,10 +41,10 @@ public class EncounterService {
 
         Encounter encounter = new Encounter(patient, doctorOrStaff);
         return encounterRepository.save(encounter);
-    }
+    }*/
 
-    public List<Encounter> getEncountersByPatientId(long patientId) {
+/*    public List<Encounter> getEncountersByPatientId(long patientId) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("no Patient found with id: " + patientId));
         return encounterRepository.findAllByPatient(patient);
-    }
+    }*/
 }
